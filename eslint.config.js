@@ -1,27 +1,10 @@
-const js = require('@eslint/js');
-const globals = require('globals');
-const reactHooks = require('eslint-plugin-react-hooks');
+// https://docs.expo.dev/guides/using-eslint/
+const { defineConfig } = require('eslint/config');
+const expoConfig = require('eslint-config-expo/flat');
 
-module.exports = [
-  { ignores: ['dist', '.next'] },
+module.exports = defineConfig([
+  expoConfig,
   {
-    files: ['**/*.{js,jsx}'],
-    languageOptions: {
-      ecmaVersion: 2020,
-      globals: globals.browser,
-      parserOptions: {
-        ecmaVersion: 'latest',
-        ecmaFeatures: { jsx: true },
-        sourceType: 'module',
-      },
-    },
-    plugins: {
-      'react-hooks': reactHooks,
-    },
-    rules: {
-      ...js.configs.recommended.rules,
-      ...reactHooks.configs.recommended.rules,
-      'no-unused-vars': ['error', { varsIgnorePattern: '^[A-Z_]' }],
-    },
+    ignores: ['dist/*'],
   },
-]
+]);
